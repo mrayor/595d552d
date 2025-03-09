@@ -1,0 +1,9 @@
+# Folders
+node_modules
+build
+.env
+coverage
+.env.test
+
+#logs
+/logs/*
