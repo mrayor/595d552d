@@ -4,7 +4,7 @@
       "target": "ES2022",
       "module": "CommonJS",
       "moduleResolution": "node",
-      "rootDir": ".",
+      "rootDir": "src",
       "outDir": "build",
       "removeComments": true,
       "esModuleInterop": true,
@@ -28,8 +28,17 @@
       "sourceMap": true,
       "inlineSources": true,
       "sourceRoot": "/",
-      "types": ["node", "jest"]
+      "types": ["node"]
   },
-  "include": ["src/**/*", "jest.config.ts"],
-  "exclude": ["node_modules", "build", "coverage"]
+  "include": ["src/**/*"],
+  "exclude": [
+    "node_modules",
+    "build",
+    "coverage",
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "**/__tests__/**",
+    "jest.config.ts",
+    "src/test"
+  ]
 }

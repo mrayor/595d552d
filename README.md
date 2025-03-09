@@ -38,8 +38,8 @@ I chose MongoDB because it is a NoSQL database that is schema flexible and has b
 1. **Clone the Repository**
 
 ```bash
-git clone https://github.com/mrayor/notes-api.git
-cd notes-api
+git clone https://github.com/mrayor/595d552d.git
+cd 595d552d
 ```
 
 2. **Install Dependencies**

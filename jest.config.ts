@@ -3,6 +3,12 @@ import type { Config } from '@jest/types';
 const baseConfig: Config.InitialOptions = {
     preset: 'ts-jest',
     testEnvironment: 'node',
+    transform: {
+        '^.+\\.tsx?$': ['ts-jest', {
+            tsconfig: 'tsconfig.test.json',
+            isolatedModules: true
+        }]
+    },
     moduleNameMapper: {
         '^@configs/(.*)$': '<rootDir>/src/configs/$1',
         '^@controllers/(.*)$': '<rootDir>/src/controllers/$1',
@@ -19,7 +25,8 @@ const baseConfig: Config.InitialOptions = {
     setupFilesAfterEnv: [
         '<rootDir>/src/__tests__/setup/setup.ts',
         '<rootDir>/src/__tests__/setup/redis.setup.ts'
-    ]
+    ],
+    testPathIgnorePatterns: ['/node_modules/', '/build/']
 };
 
 const config: Config.InitialOptions = {

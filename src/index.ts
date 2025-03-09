@@ -16,8 +16,8 @@ const server: http.Server = http.createServer(app);
 
 const startServer = (): void => {
     try {
-        server.listen(port, () => {
-            Logger.info(`🚀 Server is running at http://localhost:${port}...`);
+        server.listen(port, '0.0.0.0', () => {
+            Logger.info(`🚀 Server is running on port ${port}...`);
         });
     } catch (error: unknown) {
         Logger.error('Server failed to start...', error);
@@ -34,17 +34,18 @@ const gracefulShutdown = async () => {
 };
 
 const start = async (): Promise<void> => {
-    await database.connect();
-    await redisClient.connect();
-    startServer();
+    try {
+        await database.connect();
+        await redisClient.connect();
+        startServer();
 
-    const signals = ['SIGINT', 'SIGTERM', 'SIGQUIT'] as const;
-
-    for (let i = 0; i < signals.length; i += 1) {
-        const signal = signals[i];
-        process.on(signal, () => {
-            gracefulShutdown();
+        const signals = ['SIGINT', 'SIGTERM', 'SIGQUIT'] as const;
+        signals.forEach(signal => {
+            process.on(signal, gracefulShutdown);
         });
+    } catch (error) {
+        Logger.error('Failed to start application:', error);
+        process.exit(1);
     }
 };
 

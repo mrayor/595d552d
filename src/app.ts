@@ -12,6 +12,7 @@ import { notFoundHandler } from '@middlewares/notFound.middleware';
 import { deserializeUser } from '@middlewares/deserializeUser.middleware';
 import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec } from '@configs/swagger.config';
+import compression from 'compression';
 
 const { API_PREFIX, ORIGIN, ROUTES, NODE, ENV, JWT } = constants;
 const isProduction = NODE.env === ENV.production;
@@ -38,6 +39,7 @@ const CORS_OPTIONS = {
 app.use(helmet());
 app.use(cors(isProduction ? CORS_OPTIONS : {}));
 app.use(cookieParser());
+app.use(compression());
 app.use(express.json());
 app.use(deserializeUser({ key: JWT.accessTokenPublicKey }));
 app.use(express.urlencoded({ extended: true }));

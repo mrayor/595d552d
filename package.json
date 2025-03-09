@@ -2,18 +2,18 @@
   "name": "notes-api",
   "version": "1.0.0",
   "description": "Secure and scalable RESTful API for managing notes",
-  "main": "build/src/index.js",
+  "main": "build/index.js",
   "_moduleAliases": {
-    "@configs": "build/src/configs",
-    "@controllers": "build/src/controllers",
-    "@utils": "build/src/utils",
-    "@middlewares": "build/src/middlewares",
-    "@models": "build/src/models",
-    "@routes": "build/src/routes",
-    "@schemas": "build/src/schemas",
-    "@services": "build/src/services",
-    "@types": "build/src/types",
-    "src/types": "build/src/types"
+    "@configs": "build/configs",
+    "@controllers": "build/controllers",
+    "@utils": "build/utils",
+    "@middlewares": "build/middlewares",
+    "@models": "build/models",
+    "@routes": "build/routes",
+    "@schemas": "build/schemas",
+    "@services": "build/services",
+    "@types": "build/types",
+    "src/types": "build/types"
   },
   "keywords": [
     "notes",
@@ -23,14 +23,14 @@
     "mongodb"
   ],
   "scripts": {
-    "start:prod": "cross-env NODE_ENV=production npm run build && node -r module-alias/register build/src/index.js",
+    "start:prod": "node -r module-alias/register build/index.js",
     "start:dev": "cross-env NODE_ENV=development nodemon",
     "build": "rimraf build && tsc",
-    "test": "cross-env NODE_ENV=test jest --detectOpenHandles",
-    "test:unit": "cross-env NODE_ENV=test jest --selectProjects unit --detectOpenHandles",
-    "test:integration": "cross-env NODE_ENV=test jest --selectProjects integration --detectOpenHandles",
-    "test:e2e": "cross-env NODE_ENV=test jest --selectProjects e2e --detectOpenHandles",
-    "test:watch": "cross-env NODE_ENV=test jest --watch",
+    "test": "cross-env NODE_ENV=test ts-node -P tsconfig.test.json node_modules/.bin/jest --detectOpenHandles",
+    "test:unit": "cross-env NODE_ENV=test ts-node -P tsconfig.test.json node_modules/.bin/jest --selectProjects unit --detectOpenHandles",
+    "test:integration": "cross-env NODE_ENV=test ts-node -P tsconfig.test.json node_modules/.bin/jest --selectProjects integration --detectOpenHandles",
+    "test:e2e": "cross-env NODE_ENV=test ts-node -P tsconfig.test.json node_modules/.bin/jest --selectProjects e2e --detectOpenHandles",
+    "test:watch": "cross-env NODE_ENV=test ts-node -P tsconfig.test.json node_modules/.bin/jest --watch",
     "lint": "eslint . --ext .ts,.js,.mjs --fix"
   },
   "author": "mrayor <adesanyaayokunle@gmail.com>",
@@ -41,6 +41,7 @@
     "compression": "^1.8.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "express-rate-limit": "^7.5.0",
@@ -58,6 +59,8 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@types/node": "^22.13.10",
+    "typescript": "^5.8.2",
     "@types/compression": "^1.7.5",
     "@types/cookie-parser": "^1.4.8",
     "@types/cors": "^2.8.17",
@@ -66,23 +69,20 @@
     "@types/jsonwebtoken": "^9.0.9",
     "@types/module-alias": "^2.0.4",
     "@types/morgan": "^1.9.9",
-    "@types/node": "^22.13.10",
     "@types/supertest": "^6.0.2",
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.8",
     "@typescript-eslint/eslint-plugin": "^8.26.0",
     "@typescript-eslint/parser": "^8.26.0",
-    "cross-env": "^7.0.3",
     "eslint": "^9.22.0",
     "globals": "^16.0.0",
     "jest": "^29.7.0",
     "nodemon": "^3.1.9",
     "prettier": "^3.5.3",
-    "rimraf": "^5.0.10",
+    "rimraf": "^6.0.1",
     "supertest": "^7.0.0",
     "ts-jest": "^29.2.6",
     "ts-node": "^10.9.2",
-    "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.8.2"
+    "tsconfig-paths": "^4.2.0"
   }
 }

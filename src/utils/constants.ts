@@ -12,7 +12,7 @@ const ENV = {
 
 const NODE = {
     env: process.env.NODE_ENV,
-    port: process.env.PORT,
+    port: process.env.PORT ? parseInt(process.env.PORT, 10) : undefined,
 };
 
 const DATABASE_URL = process.env.DATABASE_URL;
@@ -48,7 +48,7 @@ const COOKIES = {
 };
 
 const DEFAULTS = {
-    port: 5000,
+    port: 3000,
 };
 
 const REGEX = {
